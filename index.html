@@ -573,9 +573,10 @@ function makeGlobe(id,opts){
   function render(){
     ry+=0.0006;const t=performance.now()/1000;ctx.clearRect(0,0,W,H);
     /* sphere rim */
-    ctx.strokeStyle=hexA(C.node,'0.12');ctx.lineWidth=1;ctx.beginPath();ctx.arc(cx,cy,R,0,7);ctx.stroke();
+    const OP=opts.op||1;
+    ctx.strokeStyle=hexA(C.node,Math.min(0.12*OP,1).toFixed(3));ctx.lineWidth=1;ctx.beginPath();ctx.arc(cx,cy,R,0,7);ctx.stroke();
     /* land dots (continents) */
-    for(const v of DOTS){const r=rot(v);const front=r.z>0;const a=front?(0.34+r.z*0.55):0.10;const p=pj(r);ctx.fillStyle=hexA(C.node,a.toFixed(3));ctx.beginPath();ctx.arc(p.x,p.y,front?1.35:0.85,0,7);ctx.fill();}
+    for(const v of DOTS){const r=rot(v);const front=r.z>0;const a=Math.min((front?(0.34+r.z*0.55):0.10)*OP,1);const p=pj(r);ctx.fillStyle=hexA(C.node,a.toFixed(3));ctx.beginPath();ctx.arc(p.x,p.y,front?1.35:0.85,0,7);ctx.fill();}
     /* arcs */
     for(const arc of ARC){const A=rot(HUB[arc.a]),B=rot(HUB[arc.b]);if(A.z<-0.2&&B.z<-0.2)continue;const pts=[];for(let s=0;s<=24;s++){const tt=s/24;let x=A.x+(B.x-A.x)*tt,y=A.y+(B.y-A.y)*tt,z=A.z+(B.z-A.z)*tt;const mm=Math.hypot(x,y,z)||1;x/=mm;y/=mm;z/=mm;const lift=1+Math.sin(Math.PI*tt)*0.32;pts.push({x:cx+x*R*lift,y:cy-y*R*lift});}
       ctx.strokeStyle=hexA(C.arc,'0.32');ctx.lineWidth=1;ctx.beginPath();pts.forEach((p,s)=>s?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.stroke();
@@ -604,7 +605,7 @@ function makeBand(id){const cv=document.getElementById(id);if(!cv)return{setActi
   addEventListener('resize',()=>{resize();if(!active)render();});
   return{setActive(on){if(on){if(active)return;resize();if(reduce){render();return;}active=true;raf=requestAnimationFrame(loop);}else{active=false;cancelAnimationFrame(raf);raf=0;}},recolor(){}};
 }
-const globe=makeGlobe('globe',{arcs:true,fill:0.425,cyf:0.42});
+const globe=makeGlobe('globe',{arcs:true,fill:0.47,cyf:0.42,op:1.2});
 const globeS=makeGlobe('globeS',{arcs:false,fill:0.4});
 const band=makeBand('bandGlobe');
 /* init */
