@@ -253,6 +253,90 @@ form{display:grid;gap:16px}
 .consent .box{width:18px;height:18px;border-radius:5px;border:1px solid var(--line2);flex:none;margin-top:1px;display:grid;place-items:center;color:transparent;transition:.2s}
 .consent.on .box{background:var(--accent);border-color:var(--accent);color:#fff}
 .secure{display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--t3)}
+/* native select chevron so dropdowns read as tappable on mobile */
+.field select{-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2386868B' stroke-width='2'><path d='M6 9l6 6 6-6'/></svg>");background-repeat:no-repeat;background-position:right 14px center;padding-right:40px}
+/* ---- mobile contact optimizations ---- */
+@media(max-width:880px){
+  #page-contact .intro{padding-top:118px}
+  #page-contact .tight{padding-top:8px}
+  /* route picker becomes a tidy, tappable list */
+  .routes{gap:10px;margin-top:20px}
+  .route{padding:16px 18px;border-color:var(--line2);min-height:60px}
+  .route:active{background:var(--bg2)}
+  .route .ra{font-size:18px}
+  /* roomier form on small screens */
+  form{gap:18px}
+  .frow{gap:14px}
+  /* 16px prevents iOS Safari auto-zoom on focus */
+  .field input,.field select,.field textarea{font-size:16px;padding:14px 16px}
+  .field select{padding-right:42px}
+  .field textarea{min-height:104px}
+  .dz{padding:22px 18px}
+  /* larger, easier consent toggle */
+  .consent{gap:13px;padding:4px 0}
+  .consent .box{width:24px;height:24px}
+  .consent .box svg{width:13px;height:13px}
+  /* full-width, thumb-friendly submit */
+  #leadform .btn-primary{width:100%;padding:17px 24px;font-size:16px}
+}
+
+/* ============ DATA ROOM ============ */
+.dr-wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
+/* vault gate */
+.dr-vault{max-width:440px;margin:0 auto;text-align:center;border:1px solid var(--line);border-radius:var(--rl);padding:clamp(34px,5vw,52px) clamp(26px,4vw,44px);background:color-mix(in srgb,var(--bg2) 60%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.dr-lock{width:64px;height:64px;margin:0 auto 22px;border-radius:50%;display:grid;place-items:center;color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,transparent);border:1px solid color-mix(in srgb,var(--accent) 30%,transparent)}
+.dr-vault h2{font-size:clamp(1.5rem,3vw,2rem);font-weight:600;letter-spacing:-.02em;margin-bottom:10px}
+.dr-vault p{color:var(--t2);font-size:15px;line-height:1.55;margin-bottom:26px}
+.dr-form{display:flex;flex-direction:column;gap:12px}
+.dr-pw{position:relative}
+.dr-pw input{width:100%;background:var(--bg);border:1px solid var(--line2);border-radius:12px;padding:15px 17px;color:var(--t1);font-family:var(--font);font-size:16px;text-align:center;letter-spacing:.04em;transition:.2s}
+.dr-pw input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 14%,transparent)}
+.dr-vault .btn-primary{justify-content:center;width:100%;padding:15px}
+.dr-err{color:var(--g-out);font-size:13px;min-height:18px;transition:.2s;opacity:0}
+.dr-err.show{opacity:1}
+.dr-shake{animation:drshake .4s var(--ease)}
+@keyframes drshake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}
+.dr-note{margin-top:22px;font-size:12px;color:var(--t3);display:flex;align-items:center;justify-content:center;gap:7px}
+/* unlocked shell */
+.dr-shell{display:none}
+.dr-shell.open{display:block;animation:drfade .5s var(--ease)}
+@keyframes drfade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.dr-bar{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;padding-bottom:22px;margin-bottom:30px;border-bottom:1px solid var(--line)}
+.dr-bar .l h3{font-size:clamp(1.3rem,2.4vw,1.7rem);font-weight:600;letter-spacing:-.02em}
+.dr-bar .l .sub{font-size:13px;color:var(--t3);margin-top:4px;display:flex;align-items:center;gap:8px}
+.dr-sync-dot{width:7px;height:7px;border-radius:50%;background:#34c759;box-shadow:0 0 0 0 rgba(52,199,89,.6);animation:drpulse 2.4s infinite}
+@keyframes drpulse{0%{box-shadow:0 0 0 0 rgba(52,199,89,.5)}70%{box-shadow:0 0 0 7px rgba(52,199,89,0)}100%{box-shadow:0 0 0 0 rgba(52,199,89,0)}}
+.dr-tools{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.dr-search{position:relative}
+.dr-search svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--t3)}
+.dr-search input{background:var(--bg2);border:1px solid var(--line);border-radius:980px;padding:11px 16px 11px 38px;font-family:var(--font);font-size:14px;color:var(--t1);width:210px;transition:.2s}
+.dr-search input:focus{outline:none;border-color:var(--accent);background:var(--bg)}
+.dr-sort{background:var(--bg2);border:1px solid var(--line);border-radius:980px;padding:11px 34px 11px 16px;font-family:var(--font);font-size:14px;color:var(--t1);cursor:pointer;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2386868B' stroke-width='2'><path d='M6 9l6 6 6-6'/></svg>");background-repeat:no-repeat;background-position:right 13px center}
+.dr-refresh{display:grid;place-items:center;width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:var(--bg2);color:var(--t2);cursor:pointer;transition:.25s}
+.dr-refresh:hover{color:var(--accent);border-color:var(--accent)}
+.dr-refresh.spin svg{animation:drspin .8s linear infinite}
+@keyframes drspin{to{transform:rotate(360deg)}}
+.dr-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));gap:14px}
+.dr-card{display:flex;align-items:flex-start;gap:15px;padding:20px;border:1px solid var(--line);border-radius:var(--r);background:var(--bg);cursor:pointer;transition:.25s var(--ease);position:relative;overflow:hidden}
+.dr-card:hover{border-color:var(--line2);transform:translateY(-3px);box-shadow:0 14px 34px -18px rgba(0,0,0,.28)}
+.dr-ic{flex:none;width:46px;height:46px;border-radius:11px;display:grid;place-items:center;color:#fff}
+.dr-ic.doc{background:#2b7de9}.dr-ic.sheet{background:#1a9d54}.dr-ic.slide{background:#e8a13a}
+.dr-ic.pdf{background:#e0483d}.dr-ic.img{background:#8a5cf6}.dr-ic.vid{background:#e0483d}
+.dr-ic.fold{background:var(--t1)}.dr-ic.file{background:var(--t2)}
+.dr-meta{min-width:0;flex:1}
+.dr-meta .nm{font-size:15px;font-weight:600;color:var(--t1);line-height:1.3;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.dr-meta .mt{font-size:12.5px;color:var(--t3);margin-top:6px}
+.dr-card .go{position:absolute;top:16px;right:16px;color:var(--t3);opacity:0;transform:translateX(-4px);transition:.25s}
+.dr-card:hover .go{opacity:1;transform:none;color:var(--accent)}
+.dr-new{position:absolute;top:0;right:0;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--accent);padding:3px 9px;border-bottom-left-radius:10px}
+.dr-skel{height:88px;border-radius:var(--r);background:linear-gradient(100deg,var(--bg2) 30%,var(--line) 50%,var(--bg2) 70%);background-size:200% 100%;animation:drshim 1.3s infinite}
+@keyframes drshim{to{background-position:-200% 0}}
+.dr-state{text-align:center;padding:60px 20px;color:var(--t2)}
+.dr-state svg{color:var(--t3);margin:0 auto 16px}
+.dr-state h4{font-size:17px;font-weight:600;color:var(--t1);margin-bottom:8px}
+.dr-state p{font-size:14px;max-width:420px;margin:0 auto;line-height:1.6}
+.dr-state code{background:var(--bg2);border:1px solid var(--line);border-radius:6px;padding:2px 7px;font-size:12.5px}
+@media(max-width:560px){.dr-search input{width:100%}.dr-tools{width:100%}.dr-search{flex:1}}
 
 /* intro (inner) */
 .intro{padding-top:150px;padding-bottom:10px;text-align:center}
@@ -696,9 +780,51 @@ footer{border-top:1px solid var(--line);background:var(--bg2);padding:0 0 40px}
         <div class="visual reveal"><canvas id="globeI"></canvas></div>
         <div class="reveal d1"><div class="kicker">Access &amp; materials</div><h2 class="h2" style="margin:16px 0">Request the investor materials.</h2>
           <p class="muted" style="font-size:16px;line-height:1.65">Qualified investors can request our investor presentation and access to a secure data room. Every inquiry is handled with discretion. Reach out and a member of the team will follow up within one business day.</p>
-          <p style="margin-top:22px"><a class="btn btn-primary" data-nav="contact">Investor inquiries <span class="arr">→</span></a></p>
+          <p style="margin-top:22px;display:flex;gap:12px;flex-wrap:wrap"><a class="btn btn-primary" data-nav="dataroom">Enter data room <span class="arr">→</span></a><a class="btn btn-ghost" data-nav="contact">Investor inquiries</a></p>
           <p class="gnote" style="text-align:left;margin-top:22px">This page is informational only and is not an offer to sell or a solicitation of an offer to buy any security. Any offer would be made only through definitive offering documents to eligible investors. See our <span data-nav="terms" style="color:var(--accent);cursor:pointer">Terms</span>.</p>
         </div>
+      </div>
+    </div>
+  </section>
+</section>
+
+<!-- ============ DATA ROOM ============ -->
+<section class="page" id="page-dataroom">
+  <div class="intro wrap">
+    <div class="kicker reveal">Secure</div>
+    <h1 class="h1 reveal d1">Investor Data Room</h1>
+    <p class="lead reveal d2">Confidential materials for qualified investors — financials, network data, and diligence documents, updated in real time.</p>
+  </div>
+
+  <section class="tight">
+    <div class="dr-wrap">
+      <!-- LOCKED -->
+      <div class="dr-vault reveal" id="drVault">
+        <div class="dr-lock"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <h2>Enter the data room</h2>
+        <p>This area is restricted to qualified investors. Enter your access code to continue.</p>
+        <form class="dr-form" id="drForm" onsubmit="return drUnlock(event)" autocomplete="off">
+          <div class="dr-pw"><input id="drPw" type="password" placeholder="Access code" aria-label="Access code" /></div>
+          <div class="dr-err" id="drErr">Incorrect access code. Please try again.</div>
+          <button type="submit" class="btn btn-primary">Unlock <span class="arr">→</span></button>
+        </form>
+        <div class="dr-note"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Documents are access-controlled by Google Drive permissions.</div>
+      </div>
+
+      <!-- UNLOCKED -->
+      <div class="dr-shell" id="drShell">
+        <div class="dr-bar">
+          <div class="l">
+            <h3>Documents</h3>
+            <div class="sub"><span class="dr-sync-dot"></span><span id="drSync">Live · syncing…</span></div>
+          </div>
+          <div class="dr-tools">
+            <div class="dr-search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg><input id="drSearch" type="text" placeholder="Search documents" oninput="drRender()" /></div>
+            <select class="dr-sort" id="drSortSel" onchange="drRender()"><option value="new">Newest first</option><option value="name">Name (A–Z)</option><option value="type">Type</option></select>
+            <button class="dr-refresh" id="drRefreshBtn" title="Refresh" onclick="drFetch(true)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2v6h-6M3 22v-6h6"/><path d="M3.5 9a9 9 0 0 1 14.9-3.4L21 8M21 15a9 9 0 0 1-14.9 3.4L3 16"/></svg></button>
+          </div>
+        </div>
+        <div class="dr-grid" id="drGrid"></div>
       </div>
     </div>
   </section>
@@ -1064,7 +1190,7 @@ footer{border-top:1px solid var(--line);background:var(--bg2);padding:0 0 40px}
         <div class="brand" data-nav="home"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="2.4" fill="currentColor"/><circle cx="12" cy="12" r="7" stroke="currentColor" stroke-width="1.4" opacity=".55"/><circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="1.1" opacity=".25"/></svg> Standard</div>
         <p>The institutional consolidator of broadband and telecommunications infrastructure across North America.</p>
       </div>
-      <div class="fcol"><h5>Company</h5><a data-nav="about">About</a><a data-nav="strategy">Strategy</a><a data-nav="leadership">Leadership</a><a data-nav="investors">Investor Relations</a><a data-nav="contact">Contact</a></div>
+      <div class="fcol"><h5>Company</h5><a data-nav="about">About</a><a data-nav="strategy">Strategy</a><a data-nav="leadership">Leadership</a><a data-nav="investors">Investor Relations</a><a data-nav="dataroom">Data Room</a><a data-nav="contact">Contact</a></div>
       <div class="fcol"><h5>Engage</h5><a data-nav="guide">WISP Owner's Guide</a><a data-nav="contact">Sell your business</a><a data-nav="contact">Investor relations</a><a data-nav="contact">Partnerships</a></div>
       <div class="fcol"><h5>Ecosystem</h5><a href="#">Standard Wi-Fi</a><a href="#">Standard Internet</a><a href="#">Standard Fund</a></div>
     </div>
@@ -1089,7 +1215,7 @@ addEventListener('resize',parallax);parallax();
 function animateHero(){const h=document.getElementById('heroH1');if(!h)return;h.classList.remove('in');requestAnimationFrame(()=>requestAnimationFrame(()=>h.classList.add('in')));}
 /* page switch */
 let curPage='home';
-function go(p,push){if(!document.getElementById('page-'+p))p='home';const prev=curPage;curPage=p;document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById('page-'+p).classList.add('active');document.querySelectorAll('.nav-links a').forEach(a=>a.classList.toggle('active',a.dataset.nav===p));document.getElementById('mm').classList.remove('open');document.getElementById('nav').classList.toggle('overdark',p==='guide');scrollTo({top:0,behavior:'instant'});setTimeout(initReveal,30);globe.setActive(p==='home');band.setActive(false);globeS.setActive(false);globeI.setActive(false);if(p==='home')animateHero();if(push!==false&&p!==prev)history.pushState({p:p},'',p==='home'?'#':'#'+p);}
+function go(p,push){if(!document.getElementById('page-'+p))p='home';const prev=curPage;curPage=p;document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById('page-'+p).classList.add('active');document.querySelectorAll('.nav-links a').forEach(a=>a.classList.toggle('active',a.dataset.nav===p));document.getElementById('mm').classList.remove('open');document.getElementById('nav').classList.toggle('overdark',p==='guide');scrollTo({top:0,behavior:'instant'});setTimeout(initReveal,30);globe.setActive(p==='home');band.setActive(false);globeS.setActive(false);globeI.setActive(false);drToggle(p);if(p==='home')animateHero();if(push!==false&&p!==prev)history.pushState({p:p},'',p==='home'?'#':'#'+p);}
 addEventListener('popstate',e=>{const p=(e.state&&e.state.p)||location.hash.replace('#','')||'home';go(p,false);});
 document.querySelectorAll('[data-nav]').forEach(el=>{if(!el.hasAttribute('tabindex'))el.setAttribute('tabindex','0');el.setAttribute('role','link');el.addEventListener('click',e=>{e.preventDefault();go(el.dataset.nav);});el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go(el.dataset.nav);}});});
 document.getElementById('burger').onclick=()=>document.getElementById('mm').classList.toggle('open');
@@ -1167,6 +1293,108 @@ const globe=makeGlobe('globe',{arcs:true,fill:0.42,cyf:0.5,op:1.2});
 const globeS=makeGlobe('globeS',{arcs:false,fill:0.4});
 const globeI=makeGlobe('globeI',{arcs:false,fill:0.4});
 const band=makeBand('bandGlobe');
+
+/* ============ DATA ROOM ============ */
+/* CONFIG — edit these three values. See DATA-ROOM-SETUP.md for instructions. */
+const DR_CONFIG={
+  password:'standard2026',                          /* ← the investor access code */
+  apiKey:'',                                         /* ← paste your Google Drive API key here */
+  folderId:'1dY15gSEHQs2VU5Jv-IJ1zhlEbn9mxciJ'      /* Standard — Data Room folder */
+};
+let drFiles=[],drTimer=null,drLoaded=false;
+function drUnlockedQ(){try{return sessionStorage.getItem('drUnlocked')==='1';}catch(e){return false;}}
+function drUnlock(e){e.preventDefault();
+  const v=(document.getElementById('drPw').value||'').trim();
+  const err=document.getElementById('drErr'),card=document.getElementById('drVault');
+  if(v&&v.toLowerCase()===String(DR_CONFIG.password).toLowerCase()){
+    try{sessionStorage.setItem('drUnlocked','1');}catch(e){}
+    err.classList.remove('show');drOpen();
+  }else{
+    err.classList.add('show');card.classList.remove('dr-shake');void card.offsetWidth;card.classList.add('dr-shake');
+  }
+  return false;
+}
+function drOpen(){
+  const v=document.getElementById('drVault');if(v)v.style.display='none';
+  const s=document.getElementById('drShell');if(s)s.classList.add('open');
+  drFetch(false);drStartPoll();
+}
+function drToggle(p){
+  if(p==='dataroom'){
+    if(drUnlockedQ()){drOpen();}
+    else{const v=document.getElementById('drVault');if(v)v.style.display='';
+      const s=document.getElementById('drShell');if(s)s.classList.remove('open');}
+  }else{drStopPoll();}
+}
+function drStartPoll(){drStopPoll();drTimer=setInterval(()=>drFetch(false,true),45000);}
+function drStopPoll(){if(drTimer){clearInterval(drTimer);drTimer=null;}}
+function drFmtTime(d){return d.toLocaleTimeString([],{hour:'numeric',minute:'2-digit'});}
+function drFmtDate(s){if(!s)return'';const d=new Date(s),now=new Date(),day=864e5;const diff=(now-d)/day;
+  if(diff<1)return'Today';if(diff<2)return'Yesterday';if(diff<7)return Math.floor(diff)+' days ago';
+  return d.toLocaleDateString([],{month:'short',day:'numeric',year:'numeric'});}
+function drFmtSize(b){if(b==null||b==='')return'';b=+b;if(!b)return'';const u=['B','KB','MB','GB'];let i=0;while(b>=1024&&i<3){b/=1024;i++;}return(b<10&&i>0?b.toFixed(1):Math.round(b))+' '+u[i];}
+function drKind(mt,name){mt=mt||'';
+  if(mt.includes('folder'))return['fold','Folder'];
+  if(mt.includes('spreadsheet')||mt.includes('excel')||mt.includes('csv'))return['sheet','Sheet'];
+  if(mt.includes('presentation')||mt.includes('powerpoint'))return['slide','Slides'];
+  if(mt.includes('pdf'))return['pdf','PDF'];
+  if(mt.includes('document')||mt.includes('word')||mt.includes('msword'))return['doc','Document'];
+  if(mt.startsWith('image/'))return['img','Image'];
+  if(mt.startsWith('video/'))return['vid','Video'];
+  return['file','File'];
+}
+const DR_GLYPH={
+  fold:'<path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>',
+  img:'<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.6"/><path d="m21 15-5-5L5 21"/>',
+  vid:'<path d="m23 7-7 5 7 5z"/><rect x="1" y="5" width="15" height="14" rx="2"/>',
+  doc:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/>'
+};
+function drGlyph(cls){return DR_GLYPH[cls]||DR_GLYPH.doc;}
+function drFetch(manual,silent){
+  const grid=document.getElementById('drGrid'),sync=document.getElementById('drSync'),btn=document.getElementById('drRefreshBtn');
+  if(!grid)return;
+  if(!DR_CONFIG.apiKey){
+    grid.innerHTML='<div class="dr-state"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"/><path d="M12 8v4M12 16h.01"/></svg><h4>Data room is being configured</h4><p>Add your Google Drive API key to <code>DR_CONFIG.apiKey</code> to go live. See <code>DATA-ROOM-SETUP.md</code> for the one-time setup.</p></div>';
+    if(sync)sync.textContent='Configuration required';return;
+  }
+  if(manual&&btn)btn.classList.add('spin');
+  if(!drLoaded&&!silent){grid.innerHTML='';for(let i=0;i<6;i++)grid.insertAdjacentHTML('beforeend','<div class="dr-skel"></div>');}
+  const q="'"+DR_CONFIG.folderId+"' in parents and trashed=false";
+  const url='https://www.googleapis.com/drive/v3/files?q='+encodeURIComponent(q)+'&key='+encodeURIComponent(DR_CONFIG.apiKey)+'&fields='+encodeURIComponent('files(id,name,mimeType,modifiedTime,size,webViewLink)')+'&orderBy=modifiedTime+desc&pageSize=200&supportsAllDrives=true&includeItemsFromAllDrives=true';
+  fetch(url).then(r=>r.json()).then(d=>{
+    if(d.error)throw new Error(d.error.message||'Drive error');
+    drFiles=d.files||[];drLoaded=true;
+    if(sync)sync.textContent='Live · updated '+drFmtTime(new Date());
+    drRender();
+  }).catch(err=>{
+    if(sync)sync.textContent='Sync error';
+    if(!drLoaded&&grid)grid.innerHTML='<div class="dr-state"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg><h4>Couldn\'t reach the data room</h4><p>'+(err.message||'Check the folder sharing and API key.')+'</p></div>';
+  }).finally(()=>{if(btn)setTimeout(()=>btn.classList.remove('spin'),550);});
+}
+function drRender(){
+  const grid=document.getElementById('drGrid');if(!grid)return;
+  const term=(document.getElementById('drSearch').value||'').toLowerCase().trim();
+  const sort=document.getElementById('drSortSel').value;
+  let list=drFiles.filter(f=>!term||(f.name||'').toLowerCase().includes(term));
+  list.sort((a,b)=>{
+    if(sort==='name')return(a.name||'').localeCompare(b.name||'');
+    if(sort==='type')return drKind(a.mimeType)[1].localeCompare(drKind(b.mimeType)[1])||(a.name||'').localeCompare(b.name||'');
+    return new Date(b.modifiedTime||0)-new Date(a.modifiedTime||0);
+  });
+  if(!list.length){grid.innerHTML='<div class="dr-state"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><h4>'+(term?'No matching documents':'No documents yet')+'</h4><p>'+(term?'Try a different search.':'Documents added to the data room folder will appear here automatically.')+'</p></div>';return;}
+  const week=Date.now()-7*864e5;
+  grid.innerHTML=list.map(f=>{
+    const[cls,label]=drKind(f.mimeType,f.name);
+    const isNew=f.modifiedTime&&new Date(f.modifiedTime).getTime()>week;
+    const meta=[label,drFmtSize(f.size),drFmtDate(f.modifiedTime)].filter(Boolean).join(' · ');
+    const href=f.webViewLink||('https://drive.google.com/file/d/'+f.id+'/view');
+    return '<a class="dr-card" href="'+href+'" target="_blank" rel="noopener">'+(isNew?'<span class="dr-new">New</span>':'')+
+      '<span class="dr-ic '+cls+'"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">'+drGlyph(cls)+'</svg></span>'+
+      '<span class="dr-meta"><span class="nm">'+drEsc(f.name||'Untitled')+'</span><span class="mt">'+meta+'</span></span>'+
+      '<span class="go"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg></span></a>';
+  }).join('');
+}
+function drEsc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 /* init */
 /* pause whichever globe is off-screen (saves mobile CPU) */
 (function(){const heroEl=document.querySelector('.hero'),bandEl=document.querySelector('.band'),visEl=document.querySelector('#page-strategy .visual'),visI=document.querySelector('#page-investors .visual');
