@@ -337,6 +337,30 @@ form{display:grid;gap:16px}
 .dr-state p{font-size:14px;max-width:420px;margin:0 auto;line-height:1.6}
 .dr-state code{background:var(--bg2);border:1px solid var(--line);border-radius:6px;padding:2px 7px;font-size:12.5px}
 @media(max-width:560px){.dr-search input{width:100%}.dr-tools{width:100%}.dr-search{flex:1}}
+/* breadcrumb */
+.dr-crumb{display:flex;align-items:center;flex-wrap:wrap;gap:2px;font-size:clamp(1.15rem,2.2vw,1.55rem);font-weight:600;letter-spacing:-.02em}
+.dr-cr{cursor:pointer;color:var(--t3);transition:.2s}
+.dr-cr:hover{color:var(--accent)}
+.dr-cr.on{color:var(--t1);cursor:default}
+.dr-csep{color:var(--t3);margin:0 6px;font-weight:400}
+/* in-page viewer */
+.dr-viewer{position:fixed;inset:0;z-index:200;display:none}
+.dr-viewer.open{display:block}
+.dr-vback{position:absolute;inset:0;background:rgba(8,8,12,.6);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);animation:drfade .3s var(--ease)}
+.dr-vpanel{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:min(1100px,94vw);height:min(88vh,920px);background:var(--bg);border:1px solid var(--line);border-radius:16px;box-shadow:0 40px 120px -30px rgba(0,0,0,.6);display:flex;flex-direction:column;overflow:hidden;animation:drpop .32s var(--ease)}
+@keyframes drpop{from{opacity:0;transform:translate(-50%,-46%) scale(.98)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+.dr-vhead{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 16px;border-bottom:1px solid var(--line);background:var(--bg2)}
+.dr-vtitle{display:flex;align-items:center;gap:13px;min-width:0}
+.dr-vtitle .dr-ic{width:38px;height:38px;border-radius:9px}
+.dr-vtitle .tx{min-width:0;display:flex;flex-direction:column}
+.dr-vtitle .nm{font-size:15px;font-weight:600;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dr-vtitle .sb{font-size:12.5px;color:var(--t3);margin-top:2px}
+.dr-vacts{display:flex;align-items:center;gap:8px;flex:none}
+.dr-vbtn{display:grid;place-items:center;width:40px;height:40px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--t2);cursor:pointer;transition:.2s}
+.dr-vbtn:hover{color:var(--accent);border-color:var(--accent)}
+.dr-vbody{flex:1;background:var(--bg2)}
+.dr-vbody iframe{width:100%;height:100%;border:0;display:block}
+@media(max-width:560px){.dr-vpanel{width:100vw;height:100vh;border-radius:0;border:0;top:0;left:0;transform:none}@keyframes drpop{from{opacity:0}to{opacity:1}}}
 
 /* intro (inner) */
 .intro{padding-top:150px;padding-bottom:10px;text-align:center}
@@ -815,7 +839,7 @@ footer{border-top:1px solid var(--line);background:var(--bg2);padding:0 0 40px}
       <div class="dr-shell" id="drShell">
         <div class="dr-bar">
           <div class="l">
-            <h3>Documents</h3>
+            <div class="dr-crumb" id="drCrumb"></div>
             <div class="sub"><span class="dr-sync-dot"></span><span id="drSync">Live · syncing…</span></div>
           </div>
           <div class="dr-tools">
@@ -828,6 +852,21 @@ footer{border-top:1px solid var(--line);background:var(--bg2);padding:0 0 40px}
       </div>
     </div>
   </section>
+
+  <!-- in-page document viewer -->
+  <div class="dr-viewer" id="drViewer">
+    <div class="dr-vback" onclick="drCloseView()"></div>
+    <div class="dr-vpanel">
+      <div class="dr-vhead">
+        <div class="dr-vtitle"><span class="dr-ic file" id="drVIc"></span><span class="tx"><span class="nm" id="drVName"></span><span class="sb" id="drVSub"></span></span></div>
+        <div class="dr-vacts">
+          <a class="dr-vbtn" id="drVOpen" target="_blank" rel="noopener" title="Open in Google Drive"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6M10 14 21 3"/></svg></a>
+          <button class="dr-vbtn" onclick="drCloseView()" title="Close (Esc)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+        </div>
+      </div>
+      <div class="dr-vbody"><iframe id="drVFrame" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+    </div>
+  </div>
 </section>
 
 <!-- ============ CONTACT ============ -->
@@ -1298,10 +1337,12 @@ const band=makeBand('bandGlobe');
 /* CONFIG — edit these three values. See DATA-ROOM-SETUP.md for instructions. */
 const DR_CONFIG={
   password:'standard2026',                          /* ← the investor access code */
-  apiKey:'AIzaSyDwe3z7wIxJlEyuBCZf2IoK-hpumnG0bbw', /* ← paste your Google Drive API key here */
+  apiKey:'AIzaSyDwe3z7wIxJlEyuBCZf2IoK-hpumnG0bbw',  /* Google Drive API key */
   folderId:'1dY15gSEHQs2VU5Jv-IJ1zhlEbn9mxciJ'      /* Standard — Data Room folder */
 };
 let drFiles=[],drTimer=null,drLoaded=false;
+let drStack=[{id:DR_CONFIG.folderId,name:'Documents'}];
+function drCur(){return drStack[drStack.length-1].id;}
 function drUnlockedQ(){try{return sessionStorage.getItem('drUnlocked')==='1';}catch(e){return false;}}
 function drUnlock(e){e.preventDefault();
   const v=(document.getElementById('drPw').value||'').trim();
@@ -1317,7 +1358,7 @@ function drUnlock(e){e.preventDefault();
 function drOpen(){
   const v=document.getElementById('drVault');if(v)v.style.display='none';
   const s=document.getElementById('drShell');if(s)s.classList.add('open');
-  drFetch(false);drStartPoll();
+  drRenderCrumb();drFetch(false);drStartPoll();
 }
 function drToggle(p){
   if(p==='dataroom'){
@@ -1359,7 +1400,7 @@ function drFetch(manual,silent){
   }
   if(manual&&btn)btn.classList.add('spin');
   if(!drLoaded&&!silent){grid.innerHTML='';for(let i=0;i<6;i++)grid.insertAdjacentHTML('beforeend','<div class="dr-skel"></div>');}
-  const q="'"+DR_CONFIG.folderId+"' in parents and trashed=false";
+  const q="'"+drCur()+"' in parents and trashed=false";
   const url='https://www.googleapis.com/drive/v3/files?q='+encodeURIComponent(q)+'&key='+encodeURIComponent(DR_CONFIG.apiKey)+'&fields='+encodeURIComponent('files(id,name,mimeType,modifiedTime,size,webViewLink)')+'&orderBy=modifiedTime+desc&pageSize=200&supportsAllDrives=true&includeItemsFromAllDrives=true';
   fetch(url).then(r=>r.json()).then(d=>{
     if(d.error)throw new Error(d.error.message||'Drive error');
@@ -1385,15 +1426,40 @@ function drRender(){
   const week=Date.now()-7*864e5;
   grid.innerHTML=list.map(f=>{
     const[cls,label]=drKind(f.mimeType,f.name);
+    const isFold=cls==='fold';
     const isNew=f.modifiedTime&&new Date(f.modifiedTime).getTime()>week;
-    const meta=[label,drFmtSize(f.size),drFmtDate(f.modifiedTime)].filter(Boolean).join(' · ');
-    const href=f.webViewLink||('https://drive.google.com/file/d/'+f.id+'/view');
-    return '<a class="dr-card" href="'+href+'" target="_blank" rel="noopener">'+(isNew?'<span class="dr-new">New</span>':'')+
+    const meta=isFold?'Folder':[label,drFmtSize(f.size),drFmtDate(f.modifiedTime)].filter(Boolean).join(' · ');
+    const go=isFold?'<path d="M9 6l6 6-6 6"/>':'<circle cx="12" cy="12" r="3"/><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/>';
+    return '<div class="dr-card" role="button" tabindex="0" onclick="drClick(\''+f.id+'\')" onkeydown="if(event.key===\'Enter\')drClick(\''+f.id+'\')">'+(isNew?'<span class="dr-new">New</span>':'')+
       '<span class="dr-ic '+cls+'"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">'+drGlyph(cls)+'</svg></span>'+
       '<span class="dr-meta"><span class="nm">'+drEsc(f.name||'Untitled')+'</span><span class="mt">'+meta+'</span></span>'+
-      '<span class="go"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg></span></a>';
+      '<span class="go"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">'+go+'</svg></span></div>';
   }).join('');
 }
+function drClick(id){const f=drFiles.find(x=>x.id===id);if(!f)return;
+  if((f.mimeType||'').includes('folder'))drOpenFolder(f);else drView(f);}
+function drOpenFolder(f){drStack.push({id:f.id,name:f.name||'Folder'});drLoaded=false;drRenderCrumb();drFetch(false);}
+function drCrumbTo(i){if(i>=drStack.length-1)return;drStack=drStack.slice(0,i+1);drLoaded=false;drRenderCrumb();drFetch(false);}
+function drRenderCrumb(){const el=document.getElementById('drCrumb');if(!el)return;
+  el.innerHTML=drStack.map((s,i)=>{const last=i===drStack.length-1;
+    return '<span class="dr-cr'+(last?' on':'')+'"'+(last?'':' onclick="drCrumbTo('+i+')"')+'>'+drEsc(s.name)+'</span>'+(last?'':'<span class="dr-csep">/</span>');}).join('');}
+function drPreviewUrl(f){const mt=f.mimeType||'',id=f.id;
+  if(mt==='application/vnd.google-apps.document')return'https://docs.google.com/document/d/'+id+'/preview';
+  if(mt==='application/vnd.google-apps.spreadsheet')return'https://docs.google.com/spreadsheets/d/'+id+'/preview';
+  if(mt==='application/vnd.google-apps.presentation')return'https://docs.google.com/presentation/d/'+id+'/preview';
+  return'https://drive.google.com/file/d/'+id+'/preview';}
+function drView(f){
+  const v=document.getElementById('drViewer');if(!v)return;
+  const[cls,label]=drKind(f.mimeType,f.name);
+  document.getElementById('drVFrame').src=drPreviewUrl(f);
+  document.getElementById('drVName').textContent=f.name||'Document';
+  document.getElementById('drVSub').textContent=[label,drFmtSize(f.size),drFmtDate(f.modifiedTime)].filter(Boolean).join(' · ');
+  const ic=document.getElementById('drVIc');ic.className='dr-ic '+cls;ic.innerHTML='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">'+drGlyph(cls)+'</svg>';
+  document.getElementById('drVOpen').href=f.webViewLink||('https://drive.google.com/file/d/'+f.id+'/view');
+  v.classList.add('open');document.body.style.overflow='hidden';
+}
+function drCloseView(){const v=document.getElementById('drViewer');if(!v)return;v.classList.remove('open');document.getElementById('drVFrame').src='';document.body.style.overflow='';}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')drCloseView();});
 function drEsc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 /* init */
 /* pause whichever globe is off-screen (saves mobile CPU) */
