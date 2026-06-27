@@ -73,6 +73,14 @@ header.nav.scrolled{padding-top:9px}
 header.nav.scrolled .nav-in{background:color-mix(in srgb,var(--bg) 74%,transparent);box-shadow:0 16px 40px -20px rgba(8,12,20,.5)}
 .brand{display:flex;align-items:center;gap:9px;font-weight:600;font-size:18px;letter-spacing:-.01em;cursor:pointer}
 .brand svg{width:22px;height:22px}
+.brand svg.logo{overflow:visible;color:var(--accent)}
+.lg-ring,.lg-dot{transform-box:fill-box;transform-origin:center}
+.lg-r1{animation:lgemit 2.4s ease-out infinite}
+.lg-r2{animation:lgemit 2.4s ease-out infinite 1.2s}
+.lg-dot{animation:lgdot 2.4s ease-in-out infinite}
+@keyframes lgemit{0%{transform:scale(.4);opacity:.7}80%{opacity:.06}100%{transform:scale(1.3);opacity:0}}
+@keyframes lgdot{0%,100%{transform:scale(.82);opacity:.85}50%{transform:scale(1.12);opacity:1}}
+@media(prefers-reduced-motion:reduce){.lg-ring,.lg-dot{animation:none!important}}
 .nav-links{display:flex;align-items:center;gap:30px}
 .nav-links a{font-size:14px;color:var(--t2);cursor:pointer;transition:color .2s}
 .nav-links a:hover,.nav-links a.active{color:var(--t1)}
@@ -389,6 +397,29 @@ form{display:grid;gap:16px}
   .ab-line,.ab-stem,.ab-conn{stroke-dashoffset:0!important}.ab-area,.ab-node{opacity:1!important}.ab-node{transform:scale(1)!important}.ab-p{opacity:0!important}
 }
 
+/* ============ LEADERSHIP — OWNERS + OPERATORS ALIGNMENT ============ */
+.lvis{display:flex;align-items:center;justify-content:center;color:var(--t1)}
+.lvis svg{width:100%;height:auto;max-width:460px}
+.lv-lbl{font-family:var(--font);font-size:13px;font-weight:700;letter-spacing:.18em;fill:var(--accent)}
+.lv-ring{stroke-dasharray:760;stroke-dashoffset:760}
+.lv-core,.lv-sig,.lv-node{transform-box:fill-box;transform-origin:center}
+.lv-orb1{transform-box:view-box;transform-origin:225px 250px}
+.lv-orb2{transform-box:view-box;transform-origin:375px 250px}
+.lvis.in .lv-ring{animation:lvdraw 1.5s ease forwards}
+.lvis.in .lv-ring-b{animation-delay:.3s}
+.lvis.in .lv-orb1{animation:lvspin 22s linear infinite}
+.lvis.in .lv-orb2{animation:lvspinr 22s linear infinite}
+.lvis.in .lv-core{animation:lvcore 2.6s ease-in-out infinite}
+.lvis.in .lv-sig{animation:lvsig 2.6s ease-out infinite}
+.lvis.in .lv-node{animation:lvnode 2.8s ease-in-out infinite}
+@keyframes lvdraw{to{stroke-dashoffset:0}}
+@keyframes lvspin{to{transform:rotate(360deg)}}
+@keyframes lvspinr{to{transform:rotate(-360deg)}}
+@keyframes lvcore{0%,100%{transform:scale(.85)}50%{transform:scale(1.12)}}
+@keyframes lvsig{0%{transform:scale(.6);opacity:.7}100%{transform:scale(2.5);opacity:0}}
+@keyframes lvnode{0%,100%{opacity:.55}50%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.lvis *{animation:none!important}.lv-ring{stroke-dashoffset:0!important}.lv-node{opacity:1!important}}
+
 /* ============ STRATEGY HERO — ACQUIRE / INTEGRATE / SCALE ============ */
 .sghero{margin:clamp(28px,4.5vw,52px) 0 0;color:var(--t1)}
 .sghero svg{display:block;width:100%;height:auto}
@@ -622,7 +653,7 @@ body[data-page="contact"] .fcta-guide{display:block}
 <header class="nav" id="nav">
   <div class="nav-in">
     <div class="brand" data-nav="home">
-      <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="2.4" fill="currentColor"/><circle cx="12" cy="12" r="7" stroke="currentColor" stroke-width="1.4" opacity=".55"/><circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="1.1" opacity=".25"/></svg>
+      <svg class="logo" viewBox="0 0 24 24" fill="none"><circle class="lg-dot" cx="12" cy="12" r="2.4" fill="currentColor"/><circle class="lg-ring lg-r1" cx="12" cy="12" r="7" stroke="currentColor" stroke-width="1.4" opacity=".55"/><circle class="lg-ring lg-r2" cx="12" cy="12" r="11" stroke="currentColor" stroke-width="1.1" opacity=".25"/></svg>
       Standard
     </div>
     <nav class="nav-links">
@@ -894,13 +925,36 @@ body[data-page="contact"] .fcta-guide{display:block}
       <div class="split">
         <div class="reveal"><div class="kicker">Leadership philosophy</div><h2 class="h2" style="margin:16px 0">We invest as owners and operators.</h2>
           <p class="muted" style="font-size:16px;line-height:1.65">Our team has sat on every side of the table — founding and running telecom businesses, executing acquisitions, and managing institutional capital. That perspective shapes how we partner: with respect for what founders built, clarity in how we transact, and commitment to the networks and communities we serve.</p>
+          <ul class="clist" style="margin-top:26px">
+            <li><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Permanence over quick exits</li>
+            <li><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Operating excellence as the source of returns</li>
+            <li><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Integrity and discretion in every transaction</li>
+            <li><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Alignment with investors, sellers, and communities</li>
+          </ul>
         </div>
-        <ul class="clist reveal d1">
-          <li><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Permanence over quick exits</li>
-          <li><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Operating excellence as the source of returns</li>
-          <li><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Integrity and discretion in every transaction</li>
-          <li><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Alignment with investors, sellers, and communities</li>
-        </ul>
+        <div class="lvis reveal d1">
+          <svg viewBox="0 0 600 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Owners and operators in alignment: two interlocking systems sharing one core">
+            <defs><radialGradient id="lvCore" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#2f6df6" stop-opacity="0.5"/><stop offset="1" stop-color="#2f6df6" stop-opacity="0"/></radialGradient></defs>
+            <line x1="107" y1="250" x2="493" y2="250" stroke="currentColor" stroke-opacity="0.12" stroke-width="1.4"/>
+            <circle class="lv-ring" cx="225" cy="250" r="118" fill="none" stroke="#2f6df6" stroke-opacity="0.55" stroke-width="2"/>
+            <circle class="lv-ring lv-ring-b" cx="375" cy="250" r="118" fill="none" stroke="#2f6df6" stroke-opacity="0.55" stroke-width="2"/>
+            <g class="lv-orb1">
+              <circle class="lv-node" cx="343" cy="250" r="6" fill="#2f6df6"/>
+              <circle class="lv-node" cx="166" cy="352.2" r="6" fill="#2f6df6"/>
+              <circle class="lv-node" cx="166" cy="147.8" r="6" fill="#2f6df6"/>
+            </g>
+            <g class="lv-orb2">
+              <circle class="lv-node" cx="493" cy="250" r="6" fill="#2f6df6"/>
+              <circle class="lv-node" cx="316" cy="352.2" r="6" fill="#2f6df6"/>
+              <circle class="lv-node" cx="316" cy="147.8" r="6" fill="#2f6df6"/>
+            </g>
+            <circle cx="300" cy="250" r="32" fill="url(#lvCore)"/>
+            <circle class="lv-sig" cx="300" cy="250" r="16" fill="none" stroke="#2f6df6" stroke-width="2"/>
+            <circle class="lv-core" cx="300" cy="250" r="14" fill="#2f6df6"/>
+            <text class="lv-lbl" x="152" y="438" text-anchor="middle">OWN</text>
+            <text class="lv-lbl" x="448" y="438" text-anchor="middle">OPERATE</text>
+          </svg>
+        </div>
       </div>
     </div>
   </section>
@@ -1725,11 +1779,11 @@ body[data-page="contact"] .fcta-guide{display:block}
     </div>
     <div class="fgrid">
       <div class="fcol fbrand">
-        <div class="brand" data-nav="home"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="2.4" fill="currentColor"/><circle cx="12" cy="12" r="7" stroke="currentColor" stroke-width="1.4" opacity=".55"/><circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="1.1" opacity=".25"/></svg> Standard</div>
+        <div class="brand" data-nav="home"><svg class="logo" viewBox="0 0 24 24" fill="none"><circle class="lg-dot" cx="12" cy="12" r="2.4" fill="currentColor"/><circle class="lg-ring lg-r1" cx="12" cy="12" r="7" stroke="currentColor" stroke-width="1.4" opacity=".55"/><circle class="lg-ring lg-r2" cx="12" cy="12" r="11" stroke="currentColor" stroke-width="1.1" opacity=".25"/></svg> Standard</div>
         <p>The institutional consolidator of broadband and telecommunications infrastructure across North America.</p>
       </div>
-      <div class="fcol"><h5>Company</h5><a data-nav="about">About</a><a data-nav="strategy">Strategy</a><a data-nav="leadership">Leadership</a><a data-nav="investors">Investor Relations</a><a data-nav="dataroom">Data Room</a><a data-nav="contact">Contact</a></div>
-      <div class="fcol"><h5>Engage</h5><a data-nav="guide">WISP Owner's Guide</a><a data-nav="contact">Sell your business</a><a data-nav="contact">Investor relations</a><a data-nav="contact">Partnerships</a></div>
+      <div class="fcol"><h5>Company</h5><a data-nav="about">About</a><a data-nav="strategy">Strategy</a><a data-nav="leadership">Leadership</a><a data-nav="contact">Contact</a></div>
+      <div class="fcol"><h5>Resources</h5><a data-nav="investors">Investor Relations</a><a data-nav="dataroom">Data Room</a><a data-nav="guide">WISP Owner's Guide</a></div>
       <div class="fcol"><h5>Ecosystem</h5><a href="#">Standard Wi-Fi</a><a href="#">Standard Internet</a><a href="#">Standard Fund</a></div>
     </div>
     <div class="fbot"><span>© 2026 Standard. All rights reserved.</span><div class="lg"><span data-nav="privacy">Privacy</span><span data-nav="terms">Terms</span><span>Disclosures</span><span style="color:var(--accent)">standard.co</span></div></div>
@@ -1835,7 +1889,7 @@ const band=makeBand('bandGlobe');
 /* CONFIG — edit these three values. See DATA-ROOM-SETUP.md for instructions. */
 const DR_CONFIG={
   password:'standard2026',                          /* ← the investor access code */
-  apiKey:'AIzaSyDwe3z7wIxJlEyuBCZf2IoK-hpumnG0bbw',  /* Google Drive API key */
+  apiKey:(function(s){try{return atob(s.split('').reverse().join(''))}catch(e){return''}})('3JmYwckbtVHco1ySvlkMmp1QCVXeFxmS4l0d3o3MldHR5NVY6lUQ'),  /* obfuscated — REAL protection: restrict this key to your domain (HTTP referrer) + Drive API only in Google Cloud Console */
   folderId:'1dY15gSEHQs2VU5Jv-IJ1zhlEbn9mxciJ'      /* Standard — Data Room folder */
 };
 let drFiles=[],drTimer=null,drLoaded=false;
