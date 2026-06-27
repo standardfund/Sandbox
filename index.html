@@ -876,7 +876,7 @@ body[data-page="contact"] .fcta-guide{display:block}
       </div>
       <div class="notes">
         <div class="note reveal"><h4>Acquisition parameters</h4><ul><li>$2M–$75M+ enterprise value</li><li>1,000–100,000+ subscribers</li><li>Positive EBITDA or clear near-term path</li><li>Full or majority acquisition; flexible structures</li></ul></div>
-        <div class="note reveal d1"><h4>Geographic focus</h4><ul><li>Mountain West &amp; Great Plains</li><li>Southeast &amp; Gulf Coast</li><li>Midwest &amp; Texas corridors</li><li>Select Canadian provinces</li></ul></div>
+        <div class="note reveal d1"><h4>Geographic focus</h4><ul><li>USA &amp; Canada</li><li>South America</li><li>Caribbean</li><li>Europe</li></ul></div>
       </div>
     </div>
   </section>
@@ -1755,10 +1755,7 @@ body[data-page="contact"] .fcta-guide{display:block}
     </div>
 
     <div class="chap" style="margin-top:40px;border-top:1px solid var(--line);padding-top:34px">
-      <div class="cn">When you're ready</div><h2>Get your number — confidentially</h2>
-      <p>Standard partners with WISP, fiber, and broadband owners on exactly these decisions: a confidential, no-obligation conversation about your options, your spectrum and infrastructure value, and your number.</p>
-      <p style="margin-top:18px"><a class="btn btn-primary" data-nav="contact">Start a confidential conversation <span class="arr">→</span></a></p>
-      <p class="gnote" style="text-align:left;margin-top:22px">This guide reflects M&amp;A market observations through 2026. Multiples, spectrum valuations, and conditions change. All case details are composite and anonymized. Not legal, financial, or tax advice — engage qualified advisors before any transaction.</p>
+      <p class="gnote" style="text-align:left">This guide reflects M&amp;A market observations through 2026. Multiples, spectrum valuations, and conditions change. All case details are composite and anonymized. Not legal, financial, or tax advice — engage qualified advisors before any transaction.</p>
     </div>
   </div>
 </section>
@@ -1889,7 +1886,7 @@ const band=makeBand('bandGlobe');
 /* CONFIG — edit these three values. See DATA-ROOM-SETUP.md for instructions. */
 const DR_CONFIG={
   password:'standard2026',                          /* ← the investor access code */
-  apiKey:(function(s){try{return atob(s.split('').reverse().join(''))}catch(e){return''}})('3JmYwckbtVHco1ySvlkMmp1QCVXeFxmS4l0d3o3MldHR5NVY6lUQ'),  /* obfuscated — REAL protection: restrict this key to your domain (HTTP referrer) + Drive API only in Google Cloud Console */
+  apiKey:(function(k){return /^__/.test(k)?'':k;})('__GDRIVE_API_KEY__'),  /* injected at build from the GDRIVE_API_KEY secret; empty in the repo so no key is committed. Restrict the key to your domain (HTTP referrer) + Drive API in Google Cloud Console. */
   folderId:'1dY15gSEHQs2VU5Jv-IJ1zhlEbn9mxciJ'      /* Standard — Data Room folder */
 };
 let drFiles=[],drTimer=null,drLoaded=false;
