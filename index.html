@@ -362,6 +362,60 @@ form{display:grid;gap:16px}
 .dr-vbody iframe{width:100%;height:100%;border:0;display:block}
 @media(max-width:560px){.dr-vpanel{width:100vw;height:100vh;border-radius:0;border:0;top:0;left:0;transform:none}@keyframes drpop{from{opacity:0}to{opacity:1}}}
 
+/* ============ ABOUT HERO — CONNECTIVITY HORIZON ============ */
+.abhero{margin:clamp(28px,4.5vw,52px) 0 0;color:var(--t1)}
+.abhero svg{display:block;width:100%;height:auto}
+.ab-line{stroke-dasharray:1400;stroke-dashoffset:1400}
+.ab-area{opacity:0}
+.ab-stem{stroke-dasharray:120;stroke-dashoffset:120}
+.ab-conn{stroke-dasharray:340;stroke-dashoffset:340}
+.ab-node,.ab-ring,.ab-p{transform-box:fill-box;transform-origin:center}
+.ab-node{opacity:0}
+.abhero.in .ab-line{animation:abdraw 1.5s var(--ease) .2s forwards}
+.abhero.in .ab-area{animation:abfade 1.2s ease .8s forwards}
+.abhero.in .ab-stem{animation:abdraw .6s ease forwards}
+.abhero.in .ab-node{animation:abpop .5s var(--ease) forwards, abpulse 3.2s ease-in-out infinite 1.6s}
+.abhero.in .ab-conn{animation:abdraw .8s ease forwards}
+.abhero.in .ab-ring{animation:abring 3.4s ease-out infinite}
+.abhero.in .ab-p{animation:abdrift 5s ease-in-out infinite}
+@keyframes abdraw{to{stroke-dashoffset:0}}
+@keyframes abfade{to{opacity:1}}
+@keyframes abpop{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:scale(1)}}
+@keyframes abpulse{0%,100%{transform:scale(.9)}50%{transform:scale(1.15)}}
+@keyframes abring{0%{transform:scale(.5);opacity:.7}100%{transform:scale(2.6);opacity:0}}
+@keyframes abdrift{0%{transform:translateY(6px);opacity:0}25%{opacity:.8}100%{transform:translateY(-46px);opacity:0}}
+@media(prefers-reduced-motion:reduce){
+  .abhero *{animation:none!important}
+  .ab-line,.ab-stem,.ab-conn{stroke-dashoffset:0!important}.ab-area,.ab-node{opacity:1!important}.ab-node{transform:scale(1)!important}.ab-p{opacity:0!important}
+}
+
+/* ============ STRATEGY HERO — ACQUIRE / INTEGRATE / SCALE ============ */
+.sghero{margin:clamp(28px,4.5vw,52px) 0 0;color:var(--t1)}
+.sghero svg{display:block;width:100%;height:auto}
+.sg-lbl{font-family:var(--font);font-size:15px;font-weight:600;letter-spacing:.18em;fill:var(--t2)}
+.sg-num{font-family:var(--font);font-size:13px;font-weight:700;letter-spacing:.1em;fill:var(--accent)}
+.sg-stage{opacity:0;transform:translateY(16px)}
+.sg-node{transform-box:fill-box;transform-origin:center}
+.sg-link{stroke-dasharray:220;stroke-dashoffset:220}
+.sg-ring{transform-box:fill-box;transform-origin:center}
+.sghero.in .st1{animation:sgin .7s var(--ease) .1s forwards}
+.sghero.in .st2{animation:sgin .7s var(--ease) .55s forwards}
+.sghero.in .st3{animation:sgin .7s var(--ease) 1s forwards}
+.sghero.in .sg-node{animation:sgpulse 3.2s ease-in-out infinite}
+.sghero.in .sg-link{animation:sgdraw 1s ease .9s forwards}
+.sghero.in .sg-arrow{animation:sgflow 1s linear infinite}
+.sghero.in .sg-ring{animation:sgring 3.4s ease-out infinite 1.2s}
+.sghero.in .sg-ring2{animation-delay:2.9s}
+@keyframes sgin{to{opacity:1;transform:translateY(0)}}
+@keyframes sgpulse{0%,100%{opacity:.55;transform:scale(.85)}50%{opacity:1;transform:scale(1.15)}}
+@keyframes sgdraw{to{stroke-dashoffset:0}}
+@keyframes sgflow{to{stroke-dashoffset:-10}}
+@keyframes sgring{0%{transform:scale(.5);opacity:.7}100%{transform:scale(1.7);opacity:0}}
+@media(prefers-reduced-motion:reduce){
+  .sghero *{animation:none!important}
+  .sg-stage{opacity:1!important;transform:none!important}.sg-link{stroke-dashoffset:0!important}
+}
+
 /* ============ INVESTOR HERO — COMPOUNDING GROWTH FIELD ============ */
 .iv2hero{margin:clamp(28px,4.5vw,52px) 0 0;color:var(--t1)}
 .iv2hero svg{display:block;width:100%;height:auto}
@@ -668,6 +722,88 @@ footer{border-top:1px solid var(--line);background:var(--bg2);padding:0 0 40px}
     <p class="lead reveal d2">Standard combines sub-scale operators into a unified platform with the cost structure, capital access, and engineering depth of a national carrier.</p>
   </div>
 
+  <div class="wrap">
+    <div class="sghero reveal">
+      <svg viewBox="0 0 1200 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Strategy: acquire fragmented operators, integrate them onto shared infrastructure, then scale into one unified network">
+  <defs>
+    <radialGradient id="sgGlow" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#2f6df6" stop-opacity="0.45"/><stop offset="1" stop-color="#2f6df6" stop-opacity="0"/></radialGradient>
+  </defs>
+  <g class="sg-stage st1">
+      <line x1="120" y1="120" x2="146" y2="138" stroke="currentColor" stroke-opacity="0.2" stroke-width="1.5"/>
+      <line x1="258" y1="128" x2="280" y2="150" stroke="currentColor" stroke-opacity="0.2" stroke-width="1.5"/>
+      <line x1="128" y1="252" x2="152" y2="236" stroke="currentColor" stroke-opacity="0.2" stroke-width="1.5"/>
+      <line x1="262" y1="258" x2="286" y2="242" stroke="currentColor" stroke-opacity="0.2" stroke-width="1.5"/>
+      <circle class="sg-node" cx="120" cy="120" r="6" fill="currentColor" fill-opacity="0.35" style="animation-delay:0.00s"/>
+      <circle class="sg-node" cx="146" cy="138" r="6" fill="currentColor" fill-opacity="0.35" style="animation-delay:0.12s"/>
+      <circle class="sg-node" cx="258" cy="128" r="6" fill="currentColor" fill-opacity="0.35" style="animation-delay:0.24s"/>
+      <circle class="sg-node" cx="280" cy="150" r="6" fill="currentColor" fill-opacity="0.35" style="animation-delay:0.36s"/>
+      <circle class="sg-node" cx="128" cy="252" r="6" fill="currentColor" fill-opacity="0.35" style="animation-delay:0.48s"/>
+      <circle class="sg-node" cx="152" cy="236" r="6" fill="currentColor" fill-opacity="0.35" style="animation-delay:0.60s"/>
+      <circle class="sg-node" cx="262" cy="258" r="6" fill="currentColor" fill-opacity="0.35" style="animation-delay:0.72s"/>
+      <circle class="sg-node" cx="286" cy="242" r="6" fill="currentColor" fill-opacity="0.35" style="animation-delay:0.84s"/>
+      <circle class="sg-node" cx="200" cy="116" r="6" fill="currentColor" fill-opacity="0.35" style="animation-delay:0.96s"/>
+      <circle class="sg-node" cx="200" cy="264" r="6" fill="currentColor" fill-opacity="0.35" style="animation-delay:1.08s"/>
+      <circle class="sg-node" cx="112" cy="190" r="6" fill="currentColor" fill-opacity="0.35" style="animation-delay:1.20s"/>
+      <circle class="sg-node" cx="288" cy="190" r="6" fill="currentColor" fill-opacity="0.35" style="animation-delay:1.32s"/>
+  </g>
+  <g class="sg-arr"><line class="sg-arrow" x1="372" y1="190" x2="430" y2="190" stroke="#2f6df6" stroke-opacity="0.7" stroke-width="2" stroke-linecap="round"/><path d="M426,182 l10,8 l-10,8" fill="none" stroke="#2f6df6" stroke-opacity="0.8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
+  <g class="sg-stage st2">
+      <rect x="594" y="118" width="12" height="144" rx="6" fill="#2f6df6"/>
+      <line class="sg-link" x1="510" y1="128" x2="594" y2="150" stroke="#2f6df6" stroke-opacity="0.5" stroke-width="1.6"/>
+      <line class="sg-link" x1="690" y1="132" x2="606" y2="150" stroke="#2f6df6" stroke-opacity="0.5" stroke-width="1.6"/>
+      <line class="sg-link" x1="505" y1="250" x2="594" y2="232" stroke="#2f6df6" stroke-opacity="0.5" stroke-width="1.6"/>
+      <line class="sg-link" x1="695" y1="252" x2="606" y2="232" stroke="#2f6df6" stroke-opacity="0.5" stroke-width="1.6"/>
+      <line class="sg-link" x1="600" y1="104" x2="600" y2="120" stroke="#2f6df6" stroke-opacity="0.5" stroke-width="1.6"/>
+      <line class="sg-link" x1="600" y1="276" x2="600" y2="262" stroke="#2f6df6" stroke-opacity="0.5" stroke-width="1.6"/>
+      <line class="sg-link" x1="470" y1="190" x2="594" y2="190" stroke="#2f6df6" stroke-opacity="0.5" stroke-width="1.6"/>
+      <line class="sg-link" x1="730" y1="190" x2="606" y2="190" stroke="#2f6df6" stroke-opacity="0.5" stroke-width="1.6"/>
+      <circle class="sg-node" cx="510" cy="128" r="6" fill="#2f6df6" fill-opacity="0.9" style="animation-delay:0.00s"/>
+      <circle class="sg-node" cx="690" cy="132" r="6" fill="#2f6df6" fill-opacity="0.9" style="animation-delay:0.10s"/>
+      <circle class="sg-node" cx="505" cy="250" r="6" fill="#2f6df6" fill-opacity="0.9" style="animation-delay:0.20s"/>
+      <circle class="sg-node" cx="695" cy="252" r="6" fill="#2f6df6" fill-opacity="0.9" style="animation-delay:0.30s"/>
+      <circle class="sg-node" cx="600" cy="104" r="6" fill="#2f6df6" fill-opacity="0.9" style="animation-delay:0.40s"/>
+      <circle class="sg-node" cx="600" cy="276" r="6" fill="#2f6df6" fill-opacity="0.9" style="animation-delay:0.50s"/>
+      <circle class="sg-node" cx="470" cy="190" r="6" fill="#2f6df6" fill-opacity="0.9" style="animation-delay:0.60s"/>
+      <circle class="sg-node" cx="730" cy="190" r="6" fill="#2f6df6" fill-opacity="0.9" style="animation-delay:0.70s"/>
+  </g>
+  <g class="sg-arr"><line class="sg-arrow" x1="772" y1="190" x2="830" y2="190" stroke="#2f6df6" stroke-opacity="0.7" stroke-width="2" stroke-linecap="round"/><path d="M826,182 l10,8 l-10,8" fill="none" stroke="#2f6df6" stroke-opacity="0.8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
+  <g class="sg-stage st3">
+      <circle class="sg-ring" cx="1000" cy="190" r="30" fill="none" stroke="#2f6df6" stroke-width="2"/>
+      <circle class="sg-ring sg-ring2" cx="1000" cy="190" r="30" fill="none" stroke="#2f6df6" stroke-width="2"/>
+      <line class="sg-link" x1="1000" y1="190" x2="1078" y2="190" stroke="#2f6df6" stroke-opacity="0.4" stroke-width="1.4"/>
+      <line class="sg-link" x1="1000" y1="190" x2="1055.2" y2="245.2" stroke="#2f6df6" stroke-opacity="0.4" stroke-width="1.4"/>
+      <line class="sg-link" x1="1000" y1="190" x2="1000" y2="268" stroke="#2f6df6" stroke-opacity="0.4" stroke-width="1.4"/>
+      <line class="sg-link" x1="1000" y1="190" x2="944.8" y2="245.2" stroke="#2f6df6" stroke-opacity="0.4" stroke-width="1.4"/>
+      <line class="sg-link" x1="1000" y1="190" x2="922" y2="190" stroke="#2f6df6" stroke-opacity="0.4" stroke-width="1.4"/>
+      <line class="sg-link" x1="1000" y1="190" x2="944.8" y2="134.8" stroke="#2f6df6" stroke-opacity="0.4" stroke-width="1.4"/>
+      <line class="sg-link" x1="1000" y1="190" x2="1000" y2="112" stroke="#2f6df6" stroke-opacity="0.4" stroke-width="1.4"/>
+      <line class="sg-link" x1="1000" y1="190" x2="1055.2" y2="134.8" stroke="#2f6df6" stroke-opacity="0.4" stroke-width="1.4"/>
+      <line class="sg-link" x1="1000" y1="190" x2="1120" y2="190" stroke="#2f6df6" stroke-opacity="0.22" stroke-width="1.2"/>
+      <line class="sg-link" x1="1000" y1="190" x2="880" y2="190" stroke="#2f6df6" stroke-opacity="0.22" stroke-width="1.2"/>
+      <line class="sg-link" x1="1000" y1="190" x2="1000" y2="80" stroke="#2f6df6" stroke-opacity="0.22" stroke-width="1.2"/>
+      <line class="sg-link" x1="1000" y1="190" x2="1000" y2="300" stroke="#2f6df6" stroke-opacity="0.22" stroke-width="1.2"/>
+      <circle cx="1000" cy="190" r="26" fill="url(#sgGlow)"/>
+      <circle class="sg-node" cx="1000" cy="190" r="13" fill="#2f6df6" style="animation-delay:0s"/>
+      <circle class="sg-node" cx="1078" cy="190" r="6" fill="#2f6df6" fill-opacity="0.9" style="animation-delay:0.00s"/>
+      <circle class="sg-node" cx="1055.2" cy="245.2" r="6" fill="#2f6df6" fill-opacity="0.9" style="animation-delay:0.09s"/>
+      <circle class="sg-node" cx="1000" cy="268" r="6" fill="#2f6df6" fill-opacity="0.9" style="animation-delay:0.18s"/>
+      <circle class="sg-node" cx="944.8" cy="245.2" r="6" fill="#2f6df6" fill-opacity="0.9" style="animation-delay:0.27s"/>
+      <circle class="sg-node" cx="922" cy="190" r="6" fill="#2f6df6" fill-opacity="0.9" style="animation-delay:0.36s"/>
+      <circle class="sg-node" cx="944.8" cy="134.8" r="6" fill="#2f6df6" fill-opacity="0.9" style="animation-delay:0.45s"/>
+      <circle class="sg-node" cx="1000" cy="112" r="6" fill="#2f6df6" fill-opacity="0.9" style="animation-delay:0.54s"/>
+      <circle class="sg-node" cx="1055.2" cy="134.8" r="6" fill="#2f6df6" fill-opacity="0.9" style="animation-delay:0.63s"/>
+      <circle class="sg-node" cx="1120" cy="190" r="6" fill="#2f6df6" fill-opacity="0.5" style="animation-delay:0.40s"/>
+      <circle class="sg-node" cx="880" cy="190" r="6" fill="#2f6df6" fill-opacity="0.5" style="animation-delay:0.52s"/>
+      <circle class="sg-node" cx="1000" cy="80" r="6" fill="#2f6df6" fill-opacity="0.5" style="animation-delay:0.64s"/>
+      <circle class="sg-node" cx="1000" cy="300" r="6" fill="#2f6df6" fill-opacity="0.5" style="animation-delay:0.76s"/>
+  </g>
+  <text class="sg-num" x="200" y="332" text-anchor="middle">01</text><text class="sg-lbl" x="200" y="362" text-anchor="middle">ACQUIRE</text>
+  <text class="sg-num" x="600" y="332" text-anchor="middle">02</text><text class="sg-lbl" x="600" y="362" text-anchor="middle">INTEGRATE</text>
+  <text class="sg-num" x="1000" y="332" text-anchor="middle">03</text><text class="sg-lbl" x="1000" y="362" text-anchor="middle">SCALE</text>
+</svg>
+    </div>
+  </div>
+
   <section class="tight">
     <div class="wrap">
       <div class="split">
@@ -778,6 +914,65 @@ footer{border-top:1px solid var(--line);background:var(--bg2);padding:0 0 40px}
     <div class="kicker reveal">About Standard</div>
     <h1 class="h1 reveal d1">Building the standard for connectivity — for the long term.</h1>
     <p class="lead reveal d2">Standard is a permanent home for the networks that connect North America. We acquire, operate, and scale broadband infrastructure with the patience of an owner and the discipline of an institution.</p>
+  </div>
+
+  <div class="wrap">
+    <div class="abhero reveal">
+      <svg viewBox="0 0 1200 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Connectivity horizon: a network of broadband towers illuminating along a rising horizon, linked into one connected system">
+  <defs>
+    <linearGradient id="abLine" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#7db0ff"/><stop offset="1" stop-color="#2f6df6"/></linearGradient>
+    <linearGradient id="abArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4f8cff" stop-opacity="0.16"/><stop offset="1" stop-color="#4f8cff" stop-opacity="0"/></linearGradient>
+  </defs>
+  <path class="ab-area" d="M60,300 Q600,256 1140,300 L1140,360 L60,360 Z" fill="url(#abArea)"/>
+  <path class="ab-conn" d="M135.6,236.3 Q216.6,202.7 297.6,222.7" fill="none" stroke="#2f6df6" stroke-opacity="0.4" stroke-width="1.6" style="animation-delay:1.10s"/>
+  <path class="ab-conn" d="M297.6,222.7 Q378.6,193.1 459.6,213.1" fill="none" stroke="#2f6df6" stroke-opacity="0.4" stroke-width="1.6" style="animation-delay:1.24s"/>
+  <path class="ab-conn" d="M459.6,213.1 Q540.6,187.4 621.6,207.4" fill="none" stroke="#2f6df6" stroke-opacity="0.4" stroke-width="1.6" style="animation-delay:1.38s"/>
+  <path class="ab-conn" d="M621.6,207.4 Q697.2,185.8 772.8,205.8" fill="none" stroke="#2f6df6" stroke-opacity="0.4" stroke-width="1.6" style="animation-delay:1.52s"/>
+  <path class="ab-conn" d="M772.8,205.8 Q853.8,185.8 934.8,207.8" fill="none" stroke="#2f6df6" stroke-opacity="0.4" stroke-width="1.6" style="animation-delay:1.66s"/>
+  <path class="ab-conn" d="M934.8,207.8 Q999.6,187.8 1064.4,212.3" fill="none" stroke="#2f6df6" stroke-opacity="0.4" stroke-width="1.6" style="animation-delay:1.80s"/>
+  
+  <path class="ab-line" d="M60,300 Q600,256 1140,300" fill="none" stroke="url(#abLine)" stroke-width="3" stroke-linecap="round"/>
+  <g class="ab-tower">
+      <line class="ab-stem" x1="135.6" y1="294.3" x2="135.6" y2="236.3" stroke="#2f6df6" stroke-opacity="0.55" stroke-width="2" stroke-linecap="round" style="animation-delay:0.50s"/>
+      <circle class="ab-ring" cx="135.6" cy="236.3" r="8" fill="none" stroke="#2f6df6" stroke-width="1.6" style="animation-delay:1.00s"/>
+      <circle class="ab-node" cx="135.6" cy="236.3" r="6" fill="#2f6df6" style="animation-delay:0.50s"/>
+    </g>
+  <g class="ab-tower">
+      <line class="ab-stem" x1="297.6" y1="284.9" x2="297.6" y2="222.7" stroke="#2f6df6" stroke-opacity="0.55" stroke-width="2" stroke-linecap="round" style="animation-delay:0.66s"/>
+      <circle class="ab-ring" cx="297.6" cy="222.7" r="8" fill="none" stroke="#2f6df6" stroke-width="1.6" style="animation-delay:1.16s"/>
+      <circle class="ab-node" cx="297.6" cy="222.7" r="6" fill="#2f6df6" style="animation-delay:0.66s"/>
+    </g>
+  <g class="ab-tower">
+      <line class="ab-stem" x1="459.6" y1="279.5" x2="459.6" y2="213.1" stroke="#2f6df6" stroke-opacity="0.55" stroke-width="2" stroke-linecap="round" style="animation-delay:0.82s"/>
+      <circle class="ab-ring" cx="459.6" cy="213.1" r="8" fill="none" stroke="#2f6df6" stroke-width="1.6" style="animation-delay:1.32s"/>
+      <circle class="ab-node" cx="459.6" cy="213.1" r="6" fill="#2f6df6" style="animation-delay:0.82s"/>
+    </g>
+  <g class="ab-tower">
+      <line class="ab-stem" x1="621.6" y1="278" x2="621.6" y2="207.4" stroke="#2f6df6" stroke-opacity="0.55" stroke-width="2" stroke-linecap="round" style="animation-delay:0.98s"/>
+      <circle class="ab-ring" cx="621.6" cy="207.4" r="8" fill="none" stroke="#2f6df6" stroke-width="1.6" style="animation-delay:1.48s"/>
+      <circle class="ab-node" cx="621.6" cy="207.4" r="6" fill="#2f6df6" style="animation-delay:0.98s"/>
+    </g>
+  <g class="ab-tower">
+      <line class="ab-stem" x1="772.8" y1="280.3" x2="772.8" y2="205.8" stroke="#2f6df6" stroke-opacity="0.55" stroke-width="2" stroke-linecap="round" style="animation-delay:1.14s"/>
+      <circle class="ab-ring" cx="772.8" cy="205.8" r="8" fill="none" stroke="#2f6df6" stroke-width="1.6" style="animation-delay:1.64s"/>
+      <circle class="ab-node" cx="772.8" cy="205.8" r="6" fill="#2f6df6" style="animation-delay:1.14s"/>
+    </g>
+  <g class="ab-tower">
+      <line class="ab-stem" x1="934.8" y1="286.5" x2="934.8" y2="207.8" stroke="#2f6df6" stroke-opacity="0.55" stroke-width="2" stroke-linecap="round" style="animation-delay:1.30s"/>
+      <circle class="ab-ring" cx="934.8" cy="207.8" r="8" fill="none" stroke="#2f6df6" stroke-width="1.6" style="animation-delay:1.80s"/>
+      <circle class="ab-node" cx="934.8" cy="207.8" r="6" fill="#2f6df6" style="animation-delay:1.30s"/>
+    </g>
+  <g class="ab-tower">
+      <line class="ab-stem" x1="1064.4" y1="294.3" x2="1064.4" y2="212.3" stroke="#2f6df6" stroke-opacity="0.55" stroke-width="2" stroke-linecap="round" style="animation-delay:1.46s"/>
+      <circle class="ab-ring" cx="1064.4" cy="212.3" r="8" fill="none" stroke="#2f6df6" stroke-width="1.6" style="animation-delay:1.96s"/>
+      <circle class="ab-node" cx="1064.4" cy="212.3" r="6" fill="#2f6df6" style="animation-delay:1.46s"/>
+    </g>
+  <circle class="ab-p" cx="297.6" cy="206.7" r="3" fill="#2f6df6" style="animation-delay:0.0s"/>
+  <circle class="ab-p" cx="621.6" cy="191.4" r="3" fill="#2f6df6" style="animation-delay:1.2s"/>
+  <circle class="ab-p" cx="934.8" cy="191.8" r="3" fill="#2f6df6" style="animation-delay:2.4s"/>
+  <circle class="ab-p" cx="1064.4" cy="196.3" r="3" fill="#2f6df6" style="animation-delay:3.6s"/>
+</svg>
+    </div>
   </div>
 
   <section class="tight">
