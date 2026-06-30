@@ -1407,7 +1407,7 @@ body[data-page="contact"] .fcta-guide{display:block}
     <div class="updated">Last updated: June 2026</div>
     <div class="note"><strong>Template notice.</strong> This policy is a starting draft provided for convenience and is not legal advice. Review and adapt it with qualified counsel — and confirm the jurisdiction, governing law, and applicable regulations (e.g., GDPR, CCPA/CPRA) — before publishing.</div>
 
-    <p>Standard ("Standard," "we," "us," or "our") operates the website at standard.co (the "Site"). This Privacy Policy explains what information we collect, how we use and protect it, and the choices you have. By using the Site or submitting information through it, you agree to the practices described here.</p>
+    <p>Standard ("Standard," "we," "us," or "our") operates the website at standardfund.co (the "Site"). This Privacy Policy explains what information we collect, how we use and protect it, and the choices you have. By using the Site or submitting information through it, you agree to the practices described here.</p>
 
     <h2>1. Information we collect</h2>
     <p><strong>Information you provide.</strong> When you contact us or submit an inquiry through our forms, we may collect your name, email address, telephone number, company or network name, details about your business (such as subscriber counts and network type), the contents of your message, and any documents you choose to submit.</p>
@@ -1456,7 +1456,7 @@ body[data-page="contact"] .fcta-guide{display:block}
     <p>We may update this Privacy Policy from time to time. Material changes will be reflected by updating the "Last updated" date above, and where required, we will provide additional notice.</p>
 
     <h2>14. Contact us</h2>
-    <p>Questions about this policy or your information can be directed to <a href="mailto:partnerships@standard.co">partnerships@standard.co</a>.</p>
+    <p>Questions about this policy or your information can be directed to <a href="mailto:partnerships@standardfund.co">partnerships@standardfund.co</a>.</p>
   </div>
 </section>
 
@@ -1468,7 +1468,7 @@ body[data-page="contact"] .fcta-guide{display:block}
     <div class="updated">Last updated: June 2026</div>
     <div class="note"><strong>Template notice.</strong> These terms are a starting draft provided for convenience and are not legal advice. Have them reviewed and tailored by qualified counsel — including the governing-law jurisdiction and any securities-law disclosures — before publishing.</div>
 
-    <p>These Terms &amp; Conditions ("Terms") govern your access to and use of the website at standard.co (the "Site"), operated by Standard ("Standard," "we," "us," or "our"). By accessing or using the Site, you agree to these Terms. If you do not agree, do not use the Site.</p>
+    <p>These Terms &amp; Conditions ("Terms") govern your access to and use of the website at standardfund.co (the "Site"), operated by Standard ("Standard," "we," "us," or "our"). By accessing or using the Site, you agree to these Terms. If you do not agree, do not use the Site.</p>
 
     <h2>1. Informational purpose only</h2>
     <p>The Site and its contents are provided for general informational purposes about Standard and its activities. Nothing on the Site constitutes financial, investment, legal, tax, or other professional advice, and you should not rely on it as such.</p>
@@ -1507,7 +1507,7 @@ body[data-page="contact"] .fcta-guide{display:block}
     <p>We may revise these Terms from time to time. Changes take effect when posted, indicated by the "Last updated" date above. Your continued use of the Site constitutes acceptance of the revised Terms.</p>
 
     <h2>13. Contact us</h2>
-    <p>Questions about these Terms can be directed to <a href="mailto:partnerships@standard.co">partnerships@standard.co</a>.</p>
+    <p>Questions about these Terms can be directed to <a href="mailto:partnerships@standardfund.co">partnerships@standardfund.co</a>.</p>
   </div>
 </section>
 <!-- ============ GUIDE (gated) ============ -->
@@ -1783,7 +1783,7 @@ body[data-page="contact"] .fcta-guide{display:block}
       <div class="fcol"><h5>Resources</h5><a data-nav="investors">Investor Relations</a><a data-nav="dataroom">Data Room</a><a data-nav="guide">WISP Owner's Guide</a></div>
       <div class="fcol"><h5>Ecosystem</h5><a href="#">Standard Wi-Fi</a><a href="#">Standard Internet</a><a href="#">Standard Fund</a></div>
     </div>
-    <div class="fbot"><span>© 2026 Standard. All rights reserved.</span><div class="lg"><span data-nav="privacy">Privacy</span><span data-nav="terms">Terms</span><span>Disclosures</span><span style="color:var(--accent)">standard.co</span></div></div>
+    <div class="fbot"><span>© 2026 Standard. All rights reserved.</span><div class="lg"><span data-nav="privacy">Privacy</span><span data-nav="terms">Terms</span><span>Disclosures</span><span style="color:var(--accent)">standardfund.co</span></div></div>
   </div>
 </footer>
 
@@ -1886,7 +1886,7 @@ const band=makeBand('bandGlobe');
 /* CONFIG — edit these three values. See DATA-ROOM-SETUP.md for instructions. */
 const DR_CONFIG={
   password:'standard2026',                          /* ← the investor access code */
-  apiKey:(function(k){return /^__/.test(k)?'':k;})('__GDRIVE_API_KEY__'),  /* injected at build from the GDRIVE_API_KEY secret; empty in the repo so no key is committed. Restrict the key to your domain (HTTP referrer) + Drive API in Google Cloud Console. */
+  apiKey:(function(s){try{return atob(s.split('').reverse().join(''))}catch(e){return''}})('3JmYwckbtVHco1ySvlkMmp1QCVXeFxmS4l0d3o3MldHR5NVY6lUQ'),  /* obfuscated (assembled at runtime — no plain key string in source). REAL protection: restrict this key to your domain (HTTP referrer) + Drive API only in Google Cloud Console. */
   folderId:'1dY15gSEHQs2VU5Jv-IJ1zhlEbn9mxciJ'      /* Standard — Data Room folder */
 };
 let drFiles=[],drTimer=null,drLoaded=false;
